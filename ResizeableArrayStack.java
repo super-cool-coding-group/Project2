@@ -60,17 +60,18 @@ public class ResizeableArrayStack<T> implements StackInterface<T>{
     }
 
     /**
-     * A method which checks if the capacity is too small or too large based on the MAXIMUM_CAPACITY
+     * A method to throw an error if the capacity of the bag is too large or too small
      * @param capacity The capacity we are checking
      */
-    public void checkCapacity(int capacity){
-        if(capacity < 1){
-            throw new IllegalArgumentException("The capacity provided was too small (less than 1) to create a Stack");
+    private void checkCapacity(int capacity){
+        String errorMessage = "Attempted to create a bag with a capacity (" + capacity + ") which is too ";
+        if (capacity >= MAX_CAPACITY){
+            errorMessage += "large";
+            throw new IllegalStateException(errorMessage);
         }
-        if(capacity > MAX_CAPACITY){
-            throw new IllegalArgumentException("The capacity provided was too large (over "
-            + MAX_CAPACITY +
-            ") to create a Stack");
+        if (capacity < 0){
+            errorMessage += "small";
+            throw new IllegalStateException(errorMessage);
         }
     }
 
@@ -91,6 +92,31 @@ public class ResizeableArrayStack<T> implements StackInterface<T>{
         if(!integrityOk){
             throw new SecurityException("ResizeableArrayStack object is corrupt or was not initialized properly.");
         }
+    }
+
+    /**
+     * A method to double the capacity of the stack array
+     */
+    private void doubleCapacity(){
+        int newCapacity = stack.length * 2;
+        checkCapacity(newCapacity);
+        T[] newStack = createStack(newCapacity);
+        stack = copyEntries(newStack);
+    }
+
+    /**
+     * A method to copy all the entries from this stack into a new stack
+     * @param newStack The stack to copy the entries into
+     * @return The stack with the copied entries
+     */
+    private T[] copyEntries(T[] newStack){
+        for(int i = 0; i < numOfEntries; i++){
+            if(newStack[i] == null){
+                continue;
+            }
+            newStack[i] = stack[i];
+        }
+        return newStack;
     }
 
     @Override
