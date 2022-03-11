@@ -54,8 +54,10 @@ public class LinkedStack<T> implements StackInterface<T> {
         // Get the first object from the stack (if one is available)
         T top = peek();
         // Assertion: head != null
+        if (head != null){
+            head = head.next; 
+        }
         // We are removing the head, so the new head will be the next item in the LinkedStack.
-        head = head.next; 
         // Return the previous top element that we got through .peek();
         return top;
     }
