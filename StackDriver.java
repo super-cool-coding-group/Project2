@@ -8,7 +8,7 @@
 public class StackDriver {
 
     public static void main(String[] args) {
-        String test = "a/b*(c+(d-e))";
+        String test = "a*b/(c-a)+d*e";
         System.out.println(convertToPostFix(test));
     }
 
