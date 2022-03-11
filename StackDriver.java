@@ -1,79 +1,113 @@
+/**
+ * This is the StackDriver class. We use this class to demo some possible usage of Stacks, such as
+ * the conversion of a infix string to a postfix string.
+ * 
+ * @author Pierlorenzo Peruzzo
+ * @version 2.0
+ */
 public class StackDriver {
 
     public static void main(String[] args) {
+        String test = "a/b*(c+(d-e))";
+        System.out.println(convertToPostFix(test));
     }
 
-    // Converts an infix expression to an equivalent postfix expression.
+    /**
+     *  Converts a infix string to a postfix string using a LinkedStack
+     * 
+     * @param infix a string with a infix expression
+     * @return the postfix string
+     */
     public static String convertToPostFix(String infix) {
-        LinkedStack<Character> operatorStack = new LinkedStack<Character>(); // operatorStack = a new empty stack
-        String postfix = ""; // postfix = a new empty string
+        // Initialize an empty LinkedStack to store the operators in the infix string
+        LinkedStack<Character> operatorStack = new LinkedStack<Character>();
+        // Initialize an empty postfix string, we will use this to return the final value
+        String postfix = "";
 
-        for (int i = 0; i < infix.length(); ++i) // while (infix has characters left to parse)
+        // We loop through all of the characters in the infix string
+        for (int i = 0; i < infix.length(); ++i)
         {
-            char nextCharacter = infix.charAt(i); // nextCharacter = next nonblank character of infix
-            if (nextCharacter == ' ')
+            // Get the current character at the looping index (i)
+            char c = infix.charAt(i);
+            // If we are dealing with a balck character, we skip processing and go to the next iteration
+            if (c == ' ')
                 continue;
 
-            switch (nextCharacter) { // switch (nextCharacter)
-                case '^': // case '^' :
+            // We switch the character c to understand how we should process it
+            switch (c) {
+                case '^':
                 {
-                    operatorStack.push(nextCharacter); // operatorStack.push(nextCharacter)
+                    // Add '^' in the stack
+                    operatorStack.push(c);
                     break;
                 }
-                case '+': // case '+' : case '-' : case '*' : case '/' :
+                case '+':
                 case '-':
                 case '*':
                 case '/': {
-                    while (!operatorStack.isEmpty() && // while (!operatorStack.isEmpty() and
-                            getOperatorPrecedence(nextCharacter) <= getOperatorPrecedence(operatorStack.peek())) {
-                        postfix += operatorStack.peek();// Append operatorStack.peek() to postfix
-                        operatorStack.pop(); // operatorStack.pop()
+
+                    // We pop the operators from the stack and we append them to the postifx output string.
+                    // We do this until: 1) the stack is empty or 2) the top entry has a lower precendence than the
+                    // new operator onto the stack
+                    while (!operatorStack.isEmpty() && 
+                    (getOperatorPrecedence(c) <= getOperatorPrecedence(operatorStack.peek()))) {
+                        postfix += operatorStack.peek();
+                        operatorStack.pop();
                     }
-                    operatorStack.push(nextCharacter); // operatorStack.push(nextCharacter)
+                    // Finally, we push the new operator in the stack
+                    operatorStack.push(c);
                     break;
                 }
                 case '(': {
-                    operatorStack.push(nextCharacter);
+                    // We push the '(' in the stack
+                    operatorStack.push(c);
                     break;
                 }
-                case ')': // Stack is not empty if infix expression is valid
+                case ')':
                 {
-                    
-                    while (!operatorStack.isEmpty() && operatorStack.peek() != '('){
-                        postfix += operatorStack.pop();
-                        operatorStack.pop();
+                    // We pop the operators from the stack and we append them to the oputput until we pop and '('
+                    // We also discard both parenthesis
+                    var topOperator = operatorStack.pop();
+                    while (topOperator != '('){
+                        postfix += topOperator;
+                        topOperator = operatorStack.pop();
                     }
-                    // topOperator = operatorStack.pop()
-                    // while (topOperator != '(')
-                    // {
-                    // Append topOperator to postfix
-                    // topOperator = operatorStack.pop()
-                    // }
-                    // break
+                    break;
                 }
                 default: {
-                    if (Character.isLetterOrDigit(nextCharacter)) // case variable:
+                    // In the default case we check to see if out character c is a variable (either a letter or a digit)
+                    if (Character.isLetterOrDigit(c))
                     {
-                        postfix += nextCharacter; // Append nextCharacter to postfix
+                        // If yes, we append c to the postfix string
+                        postfix += c;
                         break;
                     }
                     break;
                 }
-            }
-
+            }            
         }
 
-        while (!operatorStack.isEmpty()) // while (!operatorStack.isEmpty())
+        // Finally we remove all of the operators in the stack and we add them to the postfix string
+        while (!operatorStack.isEmpty())
         {
-            char topOperator = operatorStack.pop(); // topOperator = operatorStack.pop()
-            postfix += topOperator; // Append topOperator to postfix
+            char topOperator = operatorStack.pop();
+            postfix += topOperator;
         }
 
+        // Return the final converted postifx string
         return postfix;
     }
 
-    public static int getOperatorPrecedence(char ch) {
-        switch (ch) {
+    /**
+     *  Assign a number precedence for each operators
+     * 
+     * @param c the operator to be checked
+     * @return an integer representing the operational precedence of this operator, -1 if the operator is invalid
+     */
+    public static int getOperatorPrecedence(char c) {
+        // We switch a character and return an index based on its operational precedence
+        // The higher the int, the higher the precedence
+        switch (c) {
             case '+':
             case '-':
                 return 1;
