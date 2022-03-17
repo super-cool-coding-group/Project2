@@ -29,78 +29,68 @@ public class Calculator {
      * @param infix A string of an infix expression
      * @return The postfix string we created
      */
-    public static String convertToPostfix(String infix) {
+    public static String convertToPostfix(String infix){
         // Initialize an empty LinkedStack to store the operators in the infix string
         LinkedStack<Character> operatorStack = new LinkedStack<Character>();
         // Initialize an empty postfix string, we will use this to return the final value
         String postfix = "";
 
         // We loop through all of the characters in the infix string
-        for (int i = 0; i < infix.length(); ++i)
-        {
+        char currChar;
+        for (int i = 0; i < infix.length(); ++i){
             // Get the current character at the looping index (i)
-            char c = infix.charAt(i);
+            currChar = infix.charAt(i);
             // If we are dealing with a balck character, we skip processing and go to the next iteration
-            if (c == ' ')
+            if (currChar == ' ')
                 continue;
 
             // We switch the character c to understand how we should process it
-            switch (c) {
+            switch (currChar) {
                 case '^':
-                {
                     // Add '^' in the stack
-                    operatorStack.push(c);
+                    operatorStack.push(currChar);
                     break;
-                }
                 case '+':
                 case '-':
                 case '*':
-                case '/': {
-
+                case '/':
                     // We pop the operators from the stack and we append them to the postifx output string.
                     // We do this until: 1) the stack is empty or 2) the top entry has a lower precendence than the
                     // new operator onto the stack
                     while (!operatorStack.isEmpty() &&
-                    (getOperatorPrecedence(c) <= getOperatorPrecedence(operatorStack.peek()))) {
+                    (getOperatorPrecedence(currChar) <= getOperatorPrecedence(operatorStack.peek()))) {
                         postfix += operatorStack.peek();
                         operatorStack.pop();
                     }
                     // Finally, we push the new operator in the stack
-                    operatorStack.push(c);
+                    operatorStack.push(currChar);
                     break;
-                }
-                case '(': {
+                case '(':
                     // We push the '(' in the stack
-                    operatorStack.push(c);
+                    operatorStack.push(currChar);
                     break;
-                }
                 case ')':
-                {
                     // We pop the operators from the stack and we append them to the oputput until we pop and '('
                     // We also discard both parenthesis
-                    var topOperator = operatorStack.pop();
+                    char topOperator = operatorStack.pop();
                     while (topOperator != '('){
                         postfix += topOperator;
                         topOperator = operatorStack.pop();
                     }
                     break;
-                }
-                default: {
+                default:
                     // In the default case we check to see if out character c is a variable (either a letter or a digit)
-                    if (Character.isLetterOrDigit(c))
-                    {
+                    if (Character.isLetterOrDigit(currChar)){
                         // If yes, we append c to the postfix string
-                        postfix += c;
+                        postfix += currChar;
                         break;
                     }
                     break;
-                }
             }
         }
 
-        // Finally we remove all of the operators in the stack and we add them to the postfix string
-        while (!operatorStack.isEmpty())
-        {
+        // Finally, we remove all of the operators in the stack and we add them to the postfix string
+        while (!operatorStack.isEmpty()){
             char topOperator = operatorStack.pop();
             postfix += topOperator;
         }
@@ -126,7 +116,7 @@ public class Calculator {
         ResizeableArrayStack<Integer> valueStack = new ResizeableArrayStack<Integer>();
 
         // We create empty an empty variable for our current character
-        Character currChar;
+        char currChar;
         // We also create empty int variables for our two operands
         int operandOne;
         int operandTwo;
@@ -138,8 +128,8 @@ public class Calculator {
             // Assign the currChar variable to the character we are looking at
             currChar = postfix.charAt(i);
             // Sanitize all our inputs
-            // Make sure the character is not empty or null
-            if(currChar == null || currChar == ' '){
+            // Make sure the character is not empty
+            if(currChar == ' '){
                 continue;
             }
             // Check if the postfix was even valid to begin with
