@@ -7,7 +7,7 @@ Interfaces and implementations for the Stack ADT. Uses a ResizeableArrayStack an
 - Pierlorenzo Peruzzo
   - Created the StackInterface class, the LinkedStack class, and wrote the convertToPostFix method (contributed to the Calculator). Wrote JavaDocs for LinkedStack, StackInterface, and convertToPostfix.
 - Angelica Arteaga
-  - Added tests in the CalculatorTest class using JUnit to test the Calculator class
+  - Added tests in the CalculatorTest class using JUnit to test the Calculator class. Also manually converted infix to postfix and evaluated postfix using a stack on Google Docs (for Tasks 1 and 4 of Project 2)
 
 ## Extra Features
 - Super cool code courtesy of the Super Cool Coding Group
