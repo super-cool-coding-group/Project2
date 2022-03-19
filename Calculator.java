@@ -47,8 +47,15 @@ public class Calculator {
      *
      * @param infix A string of an infix expression
      * @return The postfix string we created
+     * @throws IllegalArgumentException If the expression passed was null or empty
      */
     public static String convertToPostfix(String infix){
+
+        // Check that we got an expression
+        if(infix == null || infix.length() < 0){
+            throw new IllegalArgumentException("The expression provided was either null or empty");
+        }
+
         // Initialize an empty LinkedStack to store the operators in the infix string
         LinkedStack<Character> operatorStack = new LinkedStack<Character>();
         // Initialize an empty postfix string, we will use this to return the final value
@@ -129,8 +136,15 @@ public class Calculator {
      *
      * @param postfix The postfix form expression string we are evaluating
      * @return An int denoting the result of the postfix form expression
+     * @throws IllegalArgumentException If the expression passed was null or empty
      */
     public static int evaluatePostfix(String postfix){
+
+        // Check that we got an expression
+        if(postfix == null || postfix.length() < 0){
+            throw new IllegalArgumentException("The expression provided was either null or empty");
+        }
+
         // Create a stack to evaluate the postfix expression
         ResizeableArrayStack<Integer> valueStack = new ResizeableArrayStack<Integer>();
 
