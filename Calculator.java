@@ -182,7 +182,7 @@ public class Calculator {
             // Assertion: currChar is an operator
 
             // Otherwise, we are at an operator. In this case, we apply the necessary operation
-            // The top two items in our stack are the second and first operands (FIFO)
+            // The top two items in our stack are the second and first operands (LIFO)
             operandTwo = valueStack.pop();
             operandOne = valueStack.pop();
             // We check the current character to see which operator it is
