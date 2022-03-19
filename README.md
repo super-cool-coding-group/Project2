@@ -11,6 +11,7 @@ Interfaces and implementations for the Stack ADT. Uses a ResizeableArrayStack an
 
 ## Extra Features
 - Super cool code courtesy of the Super Cool Coding Group
+- Support for exponentials
 
 ## Video Link
 -
