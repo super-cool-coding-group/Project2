@@ -1,3 +1,5 @@
+package src;
+
 /**
  * This is the Calculator class. This class hosts the main evaluation methods for this project.
  *
@@ -168,8 +170,8 @@ public class Calculator {
             // Check if the postfix was even valid to begin with
             if(!Character.isDigit(currChar) && getOperatorPrecedence(currChar) == -1){
                 throw new IllegalArgumentException(
-                    "The Postfix expression passed is composed of a non-digit or a non-operator character \'" +
-                    currChar + "\' at index " + i +"."
+                    "The Postfix expression passed is composed of a non-digit or a non-operator character '" +
+                    currChar + "' at index " + i +"."
                 );
             }
             // Assertion: currChar is a digit or an operator
@@ -229,12 +231,10 @@ public class Calculator {
         // We switch a character and return an index based on its operational precedence
         // The higher the int, the higher the precedence
         switch (check) {
-            case '+':
-            case '-':
+            case '+', '-':
                 return 1;
 
-            case '*':
-            case '/':
+            case '*', '/':
                 return 2;
 
             case '^':

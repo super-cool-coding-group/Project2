@@ -1,3 +1,13 @@
+package src;
+
+/**
+ * This is the CalculatorTest class which tests various input options for the convertToPostfix and evaluatePostfix methods
+ * in the Calculator class
+ *
+ * @author Angelica Arteaga
+ * @author George Matta
+ * @version 1.0
+ */
 public class CalculatorTest {
 
     // Test a variety of infix expressions for convertToPostfix
