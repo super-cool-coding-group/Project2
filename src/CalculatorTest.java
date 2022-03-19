@@ -15,8 +15,8 @@ import org.junit.Test;
  */
 public class CalculatorTest {
 
-    // Test a variety of infix expressions for convertToPostfix
-    // Test a variety of postfix expressions with evaluatePostfix
+    // Test a variety of infix expressions for convertToPostfix (a variety as in, many different operations)
+    // Test a variety of postfix expressions with evaluatePostfix (a variety as in, many different operations and numbers)
 
     // Call converToPostfix with all numbers
     // Call convertToPostfix with all variables
