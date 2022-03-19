@@ -16,7 +16,7 @@ Interfaces and implementations for the Stack ADT. Uses a ResizeableArrayStack an
 -
 
 ## JavaDoc Index Link
--
+- https://github.com/super-cool-coding-group/Project2/blob/main/javadocs/index.html
 
 
 
