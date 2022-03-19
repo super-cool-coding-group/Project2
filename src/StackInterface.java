@@ -1,5 +1,7 @@
 package src;
 
+import java.util.EmptyStackException;
+
 /**
  * This is the main interface for Stacks (with which we create the ResizeableArrayStack and the LinkedStack)
  *

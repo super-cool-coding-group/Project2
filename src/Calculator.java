@@ -54,7 +54,7 @@ public class Calculator {
     public static String convertToPostfix(String infix){
 
         // Check that we got an expression
-        if(infix == null || infix.length() < 0){
+        if(infix == null || infix.length() <= 0){
             throw new IllegalArgumentException("The expression provided was either null or empty");
         }
 
@@ -143,7 +143,7 @@ public class Calculator {
     public static int evaluatePostfix(String postfix){
 
         // Check that we got an expression
-        if(postfix == null || postfix.length() < 0){
+        if(postfix == null || postfix.length() <= 0){
             throw new IllegalArgumentException("The expression provided was either null or empty");
         }
 
