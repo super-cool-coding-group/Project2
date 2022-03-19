@@ -207,7 +207,7 @@ public class Calculator {
                     valueStack.push(result);
                     break;
                 case '^': // Exponentiation
-                    result = operandOne ^ operandTwo;
+                    result = (int) Math.pow(operandOne, operandTwo);
                     valueStack.push(result);
                     break;
                 // We don't care about order of presedence when calculating a postfix expression, because the postfix
