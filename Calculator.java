@@ -15,13 +15,32 @@
  *
  * The methods also use a helper method getOperatorPrecedence to apply the necessary PEMDAS order to the operations.
  *
- * Each method is documented separately
+ * Finally, there is a main method that tests the basic functionality of our two methods.
+ *
+ * Each method is documented separately.
  *
  * @author Pierlorenzo Peruzzo
  * @author George Matta
- * @version 1.0
+ * @version 1.1
  */
 public class Calculator {
+
+    /**
+     * A main method which just calls each of our methods once to see their functionality.
+     * The CalculatorTest class calls more extensive tests.
+     *
+     * We call convertToPostfix with the expression a*b/(c-a)+d*e. The postfix representation is ab*ca-/de*+.
+     * For evaluatePostfix, we substitute the values a=2 b=3 c=4 d=5 e=6 in the above equation. The answer is 33.
+     *
+     * @param args The default main method args string array parameter
+     */
+    public static void main(String[] args){
+        String inf = "a*b/(c-a)+d*e";
+        System.out.println(Calculator.convertToPostfix(inf));
+
+        int res = Calculator.evaluatePostfix("23*42-/56*+");
+        System.out.println(res);
+    }
 
     /**
      * Converts an expression from an infix form to a postfix form using a stack
@@ -192,7 +211,7 @@ public class Calculator {
      * @param check The operator we are checking
      * @return An int denoting the operational precedence of this operator. We return -1 if the operator is invalid
      */
-    public static int getOperatorPrecedence(char check) {
+    private static int getOperatorPrecedence(char check) {
         // We switch a character and return an index based on its operational precedence
         // The higher the int, the higher the precedence
         switch (check) {
