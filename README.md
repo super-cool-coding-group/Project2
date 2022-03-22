@@ -14,7 +14,7 @@ Interfaces and implementations for the Stack ADT. Uses a ResizeableArrayStack an
 - Support for exponentials
 
 ## Video Link
--
+- https://youtu.be/CK7pGCemz-0
 
 ## JavaDoc Index Link
 - https://github.com/super-cool-coding-group/Project2/blob/main/javadocs/index.html

@@ -231,10 +231,12 @@ public class Calculator {
         // We switch a character and return an index based on its operational precedence
         // The higher the int, the higher the precedence
         switch (check) {
-            case '+', '-':
+            case '+':
+            case '-':
                 return 1;
 
-            case '*', '/':
+            case '*':
+            case '/':
                 return 2;
 
             case '^':

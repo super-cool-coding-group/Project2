@@ -51,7 +51,7 @@ public class CalculatorTest {
     @Test
     public void testConvertToPostfix_Exception(){
         Exception exceptionTest = assertThrows(IllegalArgumentException.class, () -> {
-            String test = Calculator.convertToPostfix("");
+            Calculator.convertToPostfix("");
         });
         Assertions.assertEquals("The expression provided was either null or empty", exceptionTest.getMessage());
     }
@@ -103,7 +103,7 @@ public class CalculatorTest {
     public void testEvaluatePostfix_Exception(){
         // Call method with no arguments
         Exception exceptionTest = assertThrows(IllegalArgumentException.class, () -> {
-            int test = Calculator.evaluatePostfix("");
+            Calculator.evaluatePostfix("");
         });
         Assertions.assertEquals("The expression provided was either null or empty", exceptionTest.getMessage());
     }
